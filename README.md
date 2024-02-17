@@ -6,7 +6,7 @@ https://hub.docker.com/repository/docker/12281404047
 
 
 # Minicube updates
-minikube start --driver=docker --memory=18000 --cpus=4  #start k8s cluster via minikube
+minikube start --driver=docker --memory=18000 --cpus=4 --extra-config=kubelet.housekeeping-interval=10s  #start k8s cluster via minikube 
 minikube addons enable metrics-server # activate metrics server for kubernetes environment
 
 
