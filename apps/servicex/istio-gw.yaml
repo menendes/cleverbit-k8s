@@ -17,4 +17,4 @@ spec:
     - "servicex.cb-interview.com"
     tls:
       credentialName: cb-tls
-      httpsRedirect: true
+      mode: SIMPLE
