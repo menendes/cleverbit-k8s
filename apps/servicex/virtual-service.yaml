@@ -9,12 +9,6 @@ spec:
   gateways:
   - servicex-gw
   http:
-  - match:
-    - uri:
-        port: https
-        prefix: /servicex
     route:
     - destination:
         host: servicex-service
-        port:
-          name: https
