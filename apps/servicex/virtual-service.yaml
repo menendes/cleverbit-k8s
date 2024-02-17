@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: servicex-vs
+  namespace: servicex
+spec:
+  hosts:
+  - "servicex.cb-interview.com"
+  gateways:
+  - servicex-gw
+  https:
+    route:
+    - destination:
+        host: servicex-service
+        port:
+          name: https
