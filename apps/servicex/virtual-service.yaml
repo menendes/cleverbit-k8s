@@ -9,6 +9,6 @@ spec:
   gateways:
   - servicex-gw
   http:
-    route:
+  - route:
     - destination:
         host: servicex-service
