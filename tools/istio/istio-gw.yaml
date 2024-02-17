@@ -4,7 +4,7 @@ metadata:
   name: istio-ingress
   namespace: istio-ingress
 spec:
-  interval: 1m
+  interval: 5m
   dependsOn:
     - name: istio-base
       namespace: istio-system
