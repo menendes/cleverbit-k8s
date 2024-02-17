@@ -4,8 +4,9 @@ metadata:
   name: ef-servicex
   namespace: servicex
 spec:
-  workloadLabels:
-    app: servicex
+  workloadSelector:
+    labels:
+      app: servicex
   configPatches:
     # The first patch adds the lua filter to the listener/http connection manager
   - applyTo: HTTP_FILTER
