@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: s2s-app
+  namespace: servicey
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: servicey
+  template:
+    metadata:
+      labels:
+        app: servicey
+    spec:
+      containers:
+      - name: servicex
+        image: docker.io/12281404047/s2s:latest
+        ports:
+        - containerPort: 8080

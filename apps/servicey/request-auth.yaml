@@ -1,0 +1,13 @@
+apiVersion: security.istio.io/v1
+kind: RequestAuthentication
+metadata:
+  name: "jwt-servicey"
+  namespace: servicey
+spec:
+  selector:
+    matchLabels:
+      app: servicey
+  jwtRules:
+  - issuer: "testing@secure.istio.io"
+    jwksUri: "https://raw.githubusercontent.com/istio/istio/release-1.20/security/tools/jwt/samples/jwks.json"
+    outputPayloadToHeader: "X-JWT-PAYLOAD"
