@@ -16,3 +16,10 @@ spec:
       containers:
       - name: authority
         image: docker.io/12281404047/authority:latest
+        volumeMounts:
+        - name: config-volume
+          mountPath: "/app/kpf/enable-config"
+      volumes:
+      - name: config-volume
+        configMap:
+          name: authority-cm

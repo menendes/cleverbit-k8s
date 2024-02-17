@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: authority-cm
+  namespace: authority
+data:
+  Cleverbit__Enabled: "true"
