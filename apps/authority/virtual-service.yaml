@@ -9,8 +9,6 @@ spec:
   gateways:
   - authority-gw
   http:
-    route:
+  - route:
     - destination:
         host: authority-service
-        port:
-          name: https
