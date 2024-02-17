@@ -26,25 +26,22 @@ spec:
           "@type": "type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua"
           defaultSourceCode:
             inlineString: |
-          -- Json Parsing based on https://gist.github.com/tylerneylon/59f4bcf316be525b30ab
-          -- See modified script on https://gist.github.com/inaiat/02bf5d11732d8e4d7b7546399a3a49af
-          local a='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'local function b(c)if c>64 then error("Bad number "..c.." to convert to binary")end;local d=tonumber(c)local e=''for f=5,0,-1 do local g=2^f;if d>=g then e=e..'1'd=d-g else e=e..'0'end end;return e end;local function h(e)return tonumber(e,2)end;local function i(j)local k=''local l=''for f=1,string.len(j)do local m,n=string.find(a,string.sub(j,f,f))if m==nil then error("Bad base64 character "..string.sub(j,f,f))end;k=k..b(m-1)end;for f=1,string.len(k),8 do l=l..string.char(h(string.sub(k,f,f+7)))end;return l end;local o={}local function p(q,r,s,t)r=r+#q:match('^%s*',r)if q:sub(r,r)~=s then if t then error('Expected '..s..' near position '..r)end;return r,false end;return r+1,true end;local function u(q,r,v)v=v or''local w='End of input found while parsing string.'if r>#q then error(w)end;local x=q:sub(r,r)if x=='"'then return v,r+1 end;if x~='\\'then return u(q,r+1,v..x)end;local y={b='\b',f='\f',n='\n',r='\r',t='\t'}local z=q:sub(r+1,r+1)if not z then error(w)end;return u(q,r+2,v..(y[z]or z))end;local function A(q,r)local B=q:match('^-?%d+%.?%d*[eE]?[+-]?%d*',r)local v=tonumber(B)if not v then error('Error parsing number at position '..r..'.')end;return v,r+#B end;o.null={}function o.parse(q,r,C)r=r or 1;if r>#q then error('Reached unexpected end of input.')end;local r=r+#q:match('^%s*',r)local D=q:sub(r,r)if D=='{'then local E,F,G={},true,true;r=r+1;while true do F,r=o.parse(q,r,'}')if F==nil then return E,r end;if not G then error('Comma missing between object items.')end;r=p(q,r,':',true)E[F],r=o.parse(q,r)r,G=p(q,r,',')end elseif D=='['then local H,v,G={},true,true;r=r+1;while true do v,r=o.parse(q,r,']')if v==nil then return H,r end;if not G then error('Comma missing between array items.')end;H[#H+1]=v;r,G=p(q,r,',')end elseif D=='"'then return u(q,r+1)elseif D=='-'or D:match('%d')then return A(q,r)elseif D==C then return nil,r+1 else local I={['true']=true,['false']=false,['null']=o.null}for J,K in pairs(I)do local L=r+#J-1;if q:sub(r,L)==J then return K,L+1 end end;local M='position '..r..': '..q:sub(r,r+10)error('Invalid json syntax starting at '..M)end end;local function decode_jwt(O)local f=0;local P={}for Q in(O..'.'):gmatch("(.-)%.")do P[f]=i(Q)f=f+1 end;local R=o.parse(P[0])local S=o.parse(P[1])return{head=R,claims=S}end
-          function envoy_on_request(request_handle)
-            request_handle:logInfo("envoy request: trying to get jwt token")
-            headers = request_handle:headers()
-            jwt = headers:get("authorization")
-            if jwt==null then
-              request_handle:logWarn("there is is no jwt token")
-            else
-              local content = decode_jwt(jwt:sub(8))
-              local claims = content["claims"]
-              if claims==nil then
-                request_handle:logWarn("some problems to get jwt attributes"..jwt)
+              function envoy_on_request(request_handle)
+              request_handle:logInfo("envoy request: trying to get jwt token")
+              headers = request_handle:headers()
+              jwt = headers:get("authorization")
+              if jwt==null then
+                request_handle:logWarn("there is is no jwt token")
               else
-                headers:add("x-user-id", content["claims"]["sub"])
-                headers:add("x-user-name", content["claims"]["name"])
-                headers:add("x-user-email", content["claims"]["email"])
-                headers:add("X-JWT-PAYLOAD", jwt)
+                local content = decode_jwt(jwt:sub(8))
+                local claims = content["claims"]
+                if claims==nil then
+                  request_handle:logWarn("some problems to get jwt attributes"..jwt)
+                else
+                  headers:add("x-user-id", content["claims"]["sub"])
+                  headers:add("x-user-name", content["claims"]["name"])
+                  headers:add("x-user-email", content["claims"]["email"])
+                  headers:add("X-JWT-PAYLOAD", jwt)
+                end
               end
             end
-          end
