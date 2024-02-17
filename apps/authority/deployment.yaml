@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authority-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authority
+  template:
+    metadata:
+      labels:
+        app: authority
+    spec:
+      containers:
+      - name: authority
+        image: docker.io/12281404047/authority:latest
