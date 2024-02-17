@@ -11,7 +11,7 @@ spec:
   http:
   - match:
     - uri:
-        exact: /productpage
+        exact: /x
     route:
     - destination:
         host: servicex-service
