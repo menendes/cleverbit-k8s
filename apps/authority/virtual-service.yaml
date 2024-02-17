@@ -8,7 +8,7 @@ spec:
   - "authority.cb-interview.com"
   gateways:
   - authority-gw
-  https:
+  http:
     route:
     - destination:
         host: authority-service

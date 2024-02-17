@@ -8,7 +8,7 @@ spec:
   - "servicex.cb-interview.com"
   gateways:
   - servicex-gw
-  https:
+  http:
     route:
     - destination:
         host: servicex-service
