@@ -42,6 +42,6 @@ spec:
                   headers:add("x-user-name", content["claims"]["name"])
                   headers:add("x-user-email", content["claims"]["email"])
                   headers:add("X-JWT-PAYLOAD", jwt)
+                   end
+                  end
                 end
-              end
-            end
