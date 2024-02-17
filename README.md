@@ -4,10 +4,9 @@
 You can find two ımages files in link below.
 https://hub.docker.com/repository/docker/12281404047
 
-## Task 2-3-4
 
-Githug Repository
-
-https://github.com/menendes/cleverbit-k8s.git
+# Minicube updates
+minikube start --driver=docker --memory=18000 --cpus=4  #start k8s cluster via minikube
+minikube addons enable metrics-server # activate metrics server for kubernetes environment
 
 
