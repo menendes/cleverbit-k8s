@@ -17,4 +17,5 @@ spec:
     - "authority.cb-interview.com"
     tls:
       credentialName: cb-tls
-      httpsRedirect: true
+      mode: SIMPLE
+#      httpsRedirect: true
