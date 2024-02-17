@@ -12,3 +12,5 @@ spec:
   - route:
     - destination:
         host: authority-service
+        port:
+          number: 8080

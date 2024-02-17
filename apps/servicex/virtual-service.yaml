@@ -9,10 +9,7 @@ spec:
   gateways:
   - servicex-gw
   http:
-  - match:
-    - uri:
-        exact: /x
-    route:
+  - route:
     - destination:
         host: servicex-service
         port:
