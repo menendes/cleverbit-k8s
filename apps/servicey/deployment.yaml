@@ -18,3 +18,10 @@ spec:
         image: docker.io/12281404047/s2s:latest
         ports:
         - containerPort: 8080
+        volumeMounts:
+        - name: config-volume
+          mountPath: "/app/kpf/enable-config"
+      volumes:
+      - name: config-volume
+        configMap:
+          name: authority-cm
