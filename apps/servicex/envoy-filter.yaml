@@ -34,15 +34,6 @@ spec:
               if jwt==null then
                 request_handle:logWarn("there is is no jwt token")
               else
-                local content = decode_jwt(jwt:sub(8))
-                local claims = content["claims"]
-                if claims==nil then
-                  request_handle:logWarn("some problems to get jwt attributes"..jwt)
-                else
-                  headers:add("x-user-id", content["claims"]["sub"])
-                  headers:add("x-user-name", content["claims"]["name"])
-                  headers:add("x-user-email", content["claims"]["email"])
                   headers:add("X-JWT-PAYLOAD", jwt)
-                   end
                   end
                 end
