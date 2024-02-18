@@ -5,7 +5,7 @@ metadata:
   namespace: servicey
 spec:
   hosts:
-  - "servicey.cb-interview.com"
+  - "*"
   http:
   - route:
     - destination:
