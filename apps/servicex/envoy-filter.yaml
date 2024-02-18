@@ -1,0 +1,48 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: ef-servicex
+  namespace: servicex
+spec:
+  workloadSelector:
+    labels:
+      app: servicex
+  configPatches:
+    # The first patch adds the lua filter to the listener/http connection manager
+  - applyTo: HTTP_FILTER
+    match:
+      context: SIDECAR_INBOUND
+      listener:
+        portNumber: 8080
+        filterChain:
+          filter:
+            name: "envoy.filters.network.http_connection_manager"
+            subFilter:
+              name: "envoy.filters.http.router"
+    patch:
+      operation: INSERT_BEFORE
+      value: # lua filter specification
+       name: envoy.filters.http.lua
+       typed_config:
+          "@type": "type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua"
+          defaultSourceCode:
+            inlineString: |
+              function envoy_on_request(request_handle)
+              request_handle:logInfo("envoy request: trying to get jwt token")
+              headers = request_handle:headers()
+              jwt = headers:get("X-JWT-PAYLOAD")
+              if jwt==null then
+                request_handle:logWarn("there is is no jwt token")
+              else
+                local content = decode_jwt(jwt:sub(8))
+                local claims = content["claims"]
+                if claims==nil then
+                  request_handle:logWarn("some problems to get jwt attributes"..jwt)
+                else
+                  headers:add("x-user-id", content["claims"]["sub"])
+                  headers:add("x-user-name", content["claims"]["name"])
+                  headers:add("x-user-email", content["claims"]["email"])
+                  headers:add("X-JWT-PAYLOAD", jwt)
+                   end
+                  end
+                end
