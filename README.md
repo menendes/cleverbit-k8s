@@ -10,7 +10,7 @@ minikube start --driver=docker --memory=18000 --cpus=4 --extra-config=kubelet.ho
 minikube addons enable metrics-server # activate metrics server for kubernetes environment
 
 
-# taken jwt token and its command
+### taken jwt token and its command (task-4 validation-1)
 
 curl https://authority.cb-interview.com/token --resolve authority.cb-interview.com:443:10.96.7.65  --cacert authority.cb-interview.com.crt
 
@@ -25,3 +25,19 @@ token payload:
   "sub": "testing@secure.istio.io"
 }
 
+
+### task 4 validation 2 servicex logs
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://servicex.cb-interview.com/x - - -
+dbug: Microsoft.AspNetCore.Routing.Matching.DfaMatcher[1001]
+      1 candidate(s) found for the request path '/x'
+dbug: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[1]
+      Request matched endpoint 'HTTP: GET /x'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /x'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /x'
+dbug: Microsoft.AspNetCore.Server.Kestrel.Connections[9]
+      Connection id "0HN1G1P1P5RCP" completed keep alive response.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://servicex.cb-interview.com/x - 200 - text/plain;+charset=utf-8 0.2810ms

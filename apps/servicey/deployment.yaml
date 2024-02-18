@@ -14,7 +14,7 @@ spec:
         app: servicey
     spec:
       containers:
-      - name: servicex
+      - name: servicey
         image: docker.io/12281404047/s2s:latest
         ports:
         - containerPort: 8080
