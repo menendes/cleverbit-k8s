@@ -68,5 +68,14 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
       Request finished HTTP/1.1 GET http://servicey.servicey.svc.cluster.local/y - 200 - text/plain;+charset=utf-8 100.6471ms
 
 
-
+### Get Kustomization Output
+flux-system   apps          8h      True    Applied revision: main@sha1:284b000d8bb74380c1cbbe000e79e76f57d9b22c
+flux-system   authority     8h      True    Applied revision: main@sha1:284b000d8bb74380c1cbbe000e79e76f57d9b22c
+flux-system   flux-system   8h      True    Applied revision: main@sha1:284b000d8bb74380c1cbbe000e79e76f57d9b22c
+flux-system   istio         8h      True    Applied revision: main@sha1:284b000d8bb74380c1cbbe000e79e76f57d9b22c
+flux-system   mtls          8h      True    Applied revision: main@sha1:284b000d8bb74380c1cbbe000e79e76f57d9b22c
+flux-system   servicex      8h      True    Applied revision: main@sha1:284b000d8bb74380c1cbbe000e79e76f57d9b22c
+flux-system   servicey      7h37m   True    Applied revision: main@sha1:284b000d8bb74380c1cbbe000e79e76f57d9b22c
+flux-system   tls           8h      True    Applied revision: main@sha1:284b000d8bb74380c1cbbe000e79e76f57d9b22c
+flux-system   tools         8h      True    Applied revision: main@sha1:284b000d8bb74380c1cbbe000e79e76f57d9b22c
 
