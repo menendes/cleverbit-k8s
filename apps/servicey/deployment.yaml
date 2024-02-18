@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: s2s-app
+  name: servicesy-app
   namespace: servicey
 spec:
   replicas: 1
