@@ -21,7 +21,12 @@ spec:
         volumeMounts:
         - name: secret-volume
           mountPath: "/app/kpf/secret"
+        - name: config-volume
+          mountPath: "/app/kpf/enable-config"
       volumes:
       - name: secret-volume
         secret:
           secretName: servicex-secret
+      - name: config-volume
+        configMap:
+          name: authority-cm

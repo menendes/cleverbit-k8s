@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: servicex-cm
+  namespace: servicex
+data:
+  Cleverbit__Enabled: "true"
