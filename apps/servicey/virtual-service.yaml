@@ -4,8 +4,6 @@ metadata:
   name: servicey-vs
   namespace: servicey
 spec:
-  hosts:
-  - "*"
   http:
   - route:
     - destination:
