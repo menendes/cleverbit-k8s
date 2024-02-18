@@ -4,6 +4,8 @@ metadata:
   name: servicey-vs
   namespace: servicey
 spec:
+  hosts:
+  - servicey.servicey.svc.cluster.local
   http:
   - route:
     - destination:
