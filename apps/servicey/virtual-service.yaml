@@ -9,6 +9,6 @@ spec:
   http:
   - route:
     - destination:
-        host: servicey-service
+        host: servicey
         port:
           number: 8080
