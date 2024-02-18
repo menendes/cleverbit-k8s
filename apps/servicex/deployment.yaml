@@ -29,4 +29,4 @@ spec:
           secretName: servicex-secret
       - name: config-volume
         configMap:
-          name: authority-cm
+          name: servicex-cm
