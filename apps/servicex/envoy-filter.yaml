@@ -30,7 +30,7 @@ spec:
               function envoy_on_request(request_handle)
               request_handle:logInfo("envoy request: trying to get jwt token")
               headers = request_handle:headers()
-              jwt = headers:get("authorization")
+              jwt = headers:get("Authorization")
               if jwt==null then
                 request_handle:logWarn("there is is no jwt token")
               else
